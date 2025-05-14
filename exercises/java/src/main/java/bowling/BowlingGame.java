@@ -1,8 +1,10 @@
 package bowling;
 
+import java.util.Arrays;
+
 public class BowlingGame {
 
     public int totalScore(int[] gameResults) {
-        return 0;
+       return Arrays.stream(gameResults).sum();
     }
 }
