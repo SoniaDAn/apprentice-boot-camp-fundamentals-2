@@ -18,4 +18,17 @@ public class BowlingTest {
         // Then
         assertThat(result).isEqualTo(20);
     }
+
+    @Test
+    public void givenSpare_returnTotal() {
+        // Given
+        BowlingGame bowlingGame = new BowlingGame();
+        int[] gameResults = new int[] {1, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+        // When
+        int result = bowlingGame.totalScore(gameResults);
+
+        // Then
+        assertThat(result).isEqualTo(12);
+    }
 }
