@@ -35,17 +35,18 @@ class FizzBuzz {
 
     private String buzz() {
         countsDownFromFive = FIVE;
-        try {
-            return new String(Hex.decodeHex(BUZZ_HEX), StandardCharsets.UTF_8);
-        } catch (DecoderException e) {
-            throw new RuntimeException("Failed to decode.", e);
-        }
+        return getHexString(BUZZ_HEX);
     }
 
     private String fizz() {
         countsUpToThree = 0;
+        return getHexString(FIZZ_HEX);
+
+    }
+
+    private static String getHexString(String hexString) {
         try {
-            return new String(Hex.decodeHex(FIZZ_HEX), StandardCharsets.UTF_8);
+            return new String(Hex.decodeHex(hexString), StandardCharsets.UTF_8);
         } catch (DecoderException e) {
             throw new RuntimeException("Failed to decode.", e);
         }
