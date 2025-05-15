@@ -13,16 +13,20 @@ class FizzBuzz {
 
     String doFizzBuzzUpToOneHundred() {
         String resultString = "";
-        for (; countsUpToOneHundred < Byte.MAX_VALUE - 27; countsUpToOneHundred++) resultString += addFizzOrBuzz(countsUpToOneHundred) + " ";
+        int oneHundred = Byte.MAX_VALUE - 27;
+        for (; countsUpToOneHundred < oneHundred; countsUpToOneHundred++) resultString += addFizzOrBuzz(countsUpToOneHundred) + " ";
         return resultString.substring(0, resultString.length() - 1);
     }
 
-    private String addFizzOrBuzz(int foo) {
+    private String addFizzOrBuzz(int number) {
         countsUpToThree++;
         countsDownFromFive--;
-        String fizzOrBuzz = countsUpToThree == 0b11 || countsDownFromFive == 0 ? "" : String.valueOf(foo + 1);
-        if (countsUpToThree == 0b11) fizzOrBuzz += fizz();
-        if (countsDownFromFive == 0) fizzOrBuzz += buzz();
+        boolean divisibleByThree = countsUpToThree == 0b11;
+        boolean divisibleByFive = countsDownFromFive == 0;
+        boolean divisibleByThreeAndFive = divisibleByThree || divisibleByFive;
+        String fizzOrBuzz = divisibleByThreeAndFive ? "" : String.valueOf(number + 1);
+        if (divisibleByThree) fizzOrBuzz += fizz();
+        if (divisibleByFive) fizzOrBuzz += buzz();
         return fizzOrBuzz;
     }
 
