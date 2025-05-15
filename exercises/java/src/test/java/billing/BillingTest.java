@@ -33,7 +33,6 @@ public class BillingTest {
         // Then
         assertThat(result).isEqualTo(70000);
     }
-
     @Ignore
     @Test
     public void givenPrivateSellerWithAdvertOnly_returnBill() {
