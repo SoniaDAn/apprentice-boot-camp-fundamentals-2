@@ -17,6 +17,10 @@ class FizzBuzz {
 
     String doFizzBuzzUpToOneHundred() {
         String resultString = "";
+        return getResultString(resultString);
+    }
+
+    private String getResultString(String resultString) {
         for (; countsUpToOneHundred < ONE_HUNDRED; countsUpToOneHundred++) resultString += addFizzOrBuzz(countsUpToOneHundred) + " ";
         return resultString.substring(0, resultString.length() - 1);
     }
@@ -24,13 +28,20 @@ class FizzBuzz {
     private String addFizzOrBuzz(int number) {
         countsUpToThree++;
         countsDownFromFive--;
-        boolean divisibleByThree = countsUpToThree == 0b11;
-        boolean divisibleByFive = countsDownFromFive == 0;
-        boolean divisibleByThreeOrFive = divisibleByThree || divisibleByFive;
+
+        boolean divisibleByThreeOrFive = isDivisibleByThree() || isDivisibleByFive();
         String fizzOrBuzz = divisibleByThreeOrFive ? "" : String.valueOf(number + 1);
-        if (divisibleByThree) fizzOrBuzz += fizz();
-        if (divisibleByFive) fizzOrBuzz += buzz();
+        if (isDivisibleByThree()) fizzOrBuzz += fizz();
+        if (isDivisibleByFive()) fizzOrBuzz += buzz();
         return fizzOrBuzz;
+    }
+
+    private boolean isDivisibleByThree() {
+        return countsUpToThree == 0b11;
+    }
+
+    private boolean isDivisibleByFive() {
+        return countsDownFromFive == 0;
     }
 
     private String buzz() {
