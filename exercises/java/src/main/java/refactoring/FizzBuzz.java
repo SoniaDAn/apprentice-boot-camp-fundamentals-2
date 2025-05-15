@@ -7,14 +7,17 @@ import java.nio.charset.StandardCharsets;
 
 class FizzBuzz {
 
+    private static final int FIVE = new int[]{0, 0, 0, 0, 0}.length;
+    private static final String BUZZ_HEX = "42757a7a";
+    private static final String FIZZ_HEX = "46697a7a";
     private int countsUpToOneHundred;
     private int countsUpToThree;
-    private int countsDownFromFive = new int[]{0, 0, 0, 0, 0}.length;
+    private int countsDownFromFive = FIVE;
+    private static final int ONE_HUNDRED = Byte.MAX_VALUE - 27;
 
     String doFizzBuzzUpToOneHundred() {
         String resultString = "";
-        int oneHundred = Byte.MAX_VALUE - 27;
-        for (; countsUpToOneHundred < oneHundred; countsUpToOneHundred++) resultString += addFizzOrBuzz(countsUpToOneHundred) + " ";
+        for (; countsUpToOneHundred < ONE_HUNDRED; countsUpToOneHundred++) resultString += addFizzOrBuzz(countsUpToOneHundred) + " ";
         return resultString.substring(0, resultString.length() - 1);
     }
 
@@ -23,17 +26,17 @@ class FizzBuzz {
         countsDownFromFive--;
         boolean divisibleByThree = countsUpToThree == 0b11;
         boolean divisibleByFive = countsDownFromFive == 0;
-        boolean divisibleByThreeAndFive = divisibleByThree || divisibleByFive;
-        String fizzOrBuzz = divisibleByThreeAndFive ? "" : String.valueOf(number + 1);
+        boolean divisibleByThreeOrFive = divisibleByThree || divisibleByFive;
+        String fizzOrBuzz = divisibleByThreeOrFive ? "" : String.valueOf(number + 1);
         if (divisibleByThree) fizzOrBuzz += fizz();
         if (divisibleByFive) fizzOrBuzz += buzz();
         return fizzOrBuzz;
     }
 
     private String buzz() {
-        countsDownFromFive = new int[]{0, 0, 0, 0, 0}.length;
+        countsDownFromFive = FIVE;
         try {
-            return new String(Hex.decodeHex("42757a7a"), StandardCharsets.UTF_8);
+            return new String(Hex.decodeHex(BUZZ_HEX), StandardCharsets.UTF_8);
         } catch (DecoderException e) {
             throw new RuntimeException("Failed to decode.", e);
         }
@@ -42,7 +45,7 @@ class FizzBuzz {
     private String fizz() {
         countsUpToThree = 0;
         try {
-            return new String(Hex.decodeHex("46697a7a"), StandardCharsets.UTF_8);
+            return new String(Hex.decodeHex(FIZZ_HEX), StandardCharsets.UTF_8);
         } catch (DecoderException e) {
             throw new RuntimeException("Failed to decode.", e);
         }
