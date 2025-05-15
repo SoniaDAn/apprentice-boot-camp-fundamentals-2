@@ -16,13 +16,13 @@ class FizzBuzz {
     private static final int ONE_HUNDRED = Byte.MAX_VALUE - 27;
 
     String doFizzBuzzUpToOneHundred() {
-        String resultString = "";
-        return getResultString(resultString);
+        String resultString = getResultString("");
+        return resultString.substring(0, resultString.length() - 1);
     }
 
     private String getResultString(String resultString) {
         for (; countsUpToOneHundred < ONE_HUNDRED; countsUpToOneHundred++) resultString += addFizzOrBuzz(countsUpToOneHundred) + " ";
-        return resultString.substring(0, resultString.length() - 1);
+       return resultString;
     }
 
     private String addFizzOrBuzz(int number) {
